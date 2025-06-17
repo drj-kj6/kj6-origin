@@ -16,13 +16,10 @@
       height: 100vh;
       margin: 0;
       padding: 2rem;
-      position: relative;
-      overflow: hidden;
     }
     h1 {
       font-size: 1.4rem;
       margin-bottom: 1rem;
-      z-index: 2;
     }
     input, button {
       background: #111;
@@ -31,7 +28,6 @@
       padding: 0.5rem;
       font-size: 1rem;
       margin-top: 1rem;
-      z-index: 2;
     }
     .output {
       margin-top: 2rem;
@@ -41,41 +37,15 @@
       display: none;
       text-align: left;
       max-width: 600px;
-      z-index: 2;
     }
     .note {
       font-size: 0.8rem;
       color: #888;
       margin-top: 1rem;
-      z-index: 2;
-    }
-    #seal-small, #seal-large {
-      position: absolute;
-      opacity: 0.12;
-      pointer-events: none;
-    }
-    #seal-small {
-      width: 120px;
-      top: 10%;
-      z-index: 1;
-    }
-    #seal-large {
-      width: 100%;
-      height: auto;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      margin: auto;
-      position: absolute;
-      z-index: 0;
     }
   </style>
 </head>
 <body>
-
-  <img id="seal-small" src="siegel.png" style="display:none;">
-  <img id="seal-large" src="siegel.png" style="display:none;" id="background-seal">
 
   <h1>Was willst du wirklich wissen?</h1>
   <input id="keyInput" type="text" placeholder="Schreibe deine Antwort hier..." />
@@ -108,18 +78,10 @@ Und deshalb schreibe ich dies – für den, der ebenfalls fragt."
     function checkKey() {
       const input = document.getElementById('keyInput').value.toLowerCase();
       const validKeys = ['j.j06', 'du', 'verbindung'];
-      const output = document.getElementById('output');
-      const sealSmall = document.getElementById('seal-small');
-      const sealLarge = document.getElementById('seal-large');
-
       if (validKeys.includes(input)) {
-        output.style.display = 'block';
-        sealSmall.style.display = 'none';
-        sealLarge.style.display = 'block';
+        document.getElementById('output').style.display = 'block';
       } else {
-        output.style.display = 'none';
-        sealLarge.style.display = 'none';
-        sealSmall.style.display = 'block';
+        document.getElementById('output').style.display = 'none';
       }
     }
   </script>
