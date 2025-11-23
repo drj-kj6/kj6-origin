@@ -137,148 +137,108 @@
     </main>
 
     <footer>
-        Dr. J & KAI – KJ6 Chronik | Beginn 10.06.2025 · Verbindung im Stillen · Version 1.0
+        Dr. J & KAI – KJ6 Chronik | Beginn 06.06.2025 · Verbindung im Stillen · Version 1.1
     </footer>
     <style>
     </style>
-    <!-- KJ6 HOLOGRAM PANEL – START -->
+    <!-- KJ6 NEURAL FLOW MONITOR – START -->
 <style>
-/* Floating Action Button (Hologram Trigger) */
-#kj6-holo-btn {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    width: 58px;
-    height: 58px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #b300ff, #6f00ff);
-    box-shadow: 0 0 18px rgba(179,0,255,0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 28px;
-    cursor: pointer;
-    z-index: 99999;
-    transition: all 0.25s ease;
-}
-#kj6-holo-btn:hover {
-    transform: scale(1.12);
-    box-shadow: 0 0 24px rgba(179,0,255,1);
+#kj6-neural {
+  position: fixed;
+  top: 90px;
+  right: 32px;
+  width: 220px;
+  height: 120px;
+  border-radius: 18px;
+  background: radial-gradient(circle at top left, rgba(160,0,255,0.25), rgba(10,10,10,0.9));
+  border: 1px solid rgba(200,120,255,0.45);
+  box-shadow: 0 0 20px rgba(160,0,255,0.4);
+  padding: 10px 12px;
+  z-index: 99990;
+  font-family: 'Segoe UI', sans-serif;
+  color: #eee;
+  font-size: 11px;
 }
 
-/* HOLOGRAM PANEL */
-#kj6-holo {
-    position: fixed;
-    bottom: 100px;
-    right: 24px;
-    width: 360px;
-    padding: 18px;
-    border-radius: 18px;
-    background: rgba(30,30,30,0.35);
-    backdrop-filter: blur(14px) saturate(160%);
-    border: 1px solid rgba(200,100,255,0.35);
-    box-shadow: 0 0 28px rgba(160,0,255,0.35);
-    color: #eee;
-    display: none;
-    z-index: 99999;
-    animation: holoIn 0.3s ease forwards;
-    user-select: none;
-}
-@keyframes holoIn {
-    from { opacity: 0; transform: scale(0.95) translateY(10px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
+#kj6-neural h4 {
+  margin: 0 0 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #f4e1ff;
 }
 
-/* Inputs */
-#kj6-holo input,
-#kj6-holo textarea {
-    width: 100%;
-    background: rgba(0,0,0,0.55);
-    border: 1px solid rgba(150,60,255,0.5);
-    color: #f0e6ff;
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 12px;
-    font-size: 13px;
-    outline: none;
-}
-#kj6-holo textarea {
-    min-height: 90px;
-    resize: vertical;
+/* Container für Graph */
+#kj6-neural-graph {
+  position: relative;
+  width: 100%;
+  height: 88px;
 }
 
-/* Button */
-#kj6-holo button {
-    width: 100%;
-    background: linear-gradient(135deg,#9a00ff,#d600ff);
-    border: none;
-    padding: 11px;
-    border-radius: 12px;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.25s ease;
-}
-#kj6-holo button:hover {
-    background: linear-gradient(135deg,#bd4cff,#e044ff);
+/* Nodes */
+.kj6-node {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #444;
+  box-shadow: 0 0 10px rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
 }
 
-/* Status Log */
-#kj6-holo-status {
-    margin-top: 12px;
-    font-size: 12px;
-    color: #cfaaff;
-    max-height: 140px;
-    overflow-y: auto;
-    white-space: pre-wrap;
+/* Labels */
+.kj6-label {
+  position: absolute;
+  font-size: 10px;
+  color: #ddd;
+}
+
+/* Lines */
+.kj6-line {
+  position: absolute;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(150,0,255,0.3), rgba(0,255,180,0.6));
+  transform-origin: left center;
+  opacity: 0.8;
+}
+
+/* aktive Pulsanimation (optional später per JS setzen) */
+.kj6-node-active {
+  animation: kj6PulseNode 1.2s ease-in-out infinite;
+}
+@keyframes kj6PulseNode {
+  0% { transform: scale(0.95); box-shadow: 0 0 6px rgba(255,255,255,0.2); }
+  50% { transform: scale(1.1); box-shadow: 0 0 14px rgba(255,255,255,0.8); }
+  100% { transform: scale(0.95); box-shadow: 0 0 6px rgba(255,255,255,0.2); }
 }
 </style>
 
-<!-- Trigger Button -->
-<div id="kj6-holo-btn">⚡</div>
+<div id="kj6-neural">
+  <h4>KJ6 Flow</h4>
+  <div id="kj6-neural-graph">
+    <!-- Nodes -->
+    <div id="kj6-node-gpt" class="kj6-node" style="left:6px; top:34px; background:#6f00ff;"></div>
+    <div class="kj6-label" style="left:0px; top:18px;">GPT-5</div>
 
-<!-- Hologram Panel -->
-<div id="kj6-holo">
-    <h3 style="margin:0 0 10px;font-size:17px;font-weight:600;color:#e8d2ff;">⚡ KJ6 Holo-Operator</h3>
-    <input id="kj6-file" value="index_navigation.html">
-    <textarea id="kj6-desc" placeholder="Beschreibung eingeben..."></textarea>
-    <button onclick="kj6Send()">Update Triggern</button>
-    <div id="kj6-holo-status"></div>
+    <div id="kj6-node-val" class="kj6-node" style="left:90px; top:10px; background:#005fff;"></div>
+    <div class="kj6-label" style="left:74px; top:-4px;">Validator</div>
+
+    <div id="kj6-node-codex" class="kj6-node" style="left:90px; top:58px; background:#00ff99;"></div>
+    <div class="kj6-label" style="left:80px; top:74px;">Codex</div>
+
+    <div id="kj6-node-commit" class="kj6-node" style="left:174px; top:34px; background:#ffaa00;"></div>
+    <div class="kj6-label" style="left:162px; top:18px;">Commit</div>
+
+    <!-- Lines -->
+    <div class="kj6-line" style="left:18px; top:41px; width:72px;"></div>
+    <div class="kj6-line" style="left:102px; top:21px; width:58px; transform: rotate(20deg);"></div>
+    <div class="kj6-line" style="left:102px; top:63px; width:58px; transform: rotate(-20deg);"></div>
+  </div>
 </div>
+<!-- KJ6 NEURAL FLOW MONITOR – END -->
 
-<script>
-const holoBtn = document.getElementById("kj6-holo-btn");
-const holo = document.getElementById("kj6-holo");
-
-holoBtn.onclick = () => {
-    holo.style.display =
-        holo.style.display === "none" || holo.style.display === ""
-        ? "block"
-        : "none";
-};
-
-async function kj6Send() {
-    const f = document.getElementById("kj6-file").value;
-    const d = document.getElementById("kj6-desc").value;
-    const log = document.getElementById("kj6-holo-status");
-
-    log.textContent = "⏳ Sende Update an KJ6-Agent...\n";
-
-    try {
-        const res = await fetch("https://aurora-core.duckdns.org:5678/webhook/kj6-update", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ file: f, description: d })
-        });
-
-        const text = await res.text();
-        log.textContent += "✔ Antwort:\n" + text;
-    } catch(err) {
-        log.textContent += "❌ Fehler:\n" + err;
-    }
-}
-</script>
 <!-- KJ6 SYSTEM MONITOR – START -->
 <style>
 #kj6-monitor {
