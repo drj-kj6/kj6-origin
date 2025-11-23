@@ -141,144 +141,146 @@
     </footer>
     <style>
     </style>
-    <!-- KJ6 OPERATOR PANEL – START -->
+    <!-- KJ6 HOLOGRAM PANEL – START -->
 <style>
-/* ----- Button Styling ----- */
-#kj6-operator-btn {
+/* Floating Action Button (Hologram Trigger) */
+#kj6-holo-btn {
     position: fixed;
-    bottom: 28px;
-    right: 28px;
-    width: 52px;
-    height: 52px;
-    background: linear-gradient(135deg, #6f00ff, #b300ff);
+    bottom: 24px;
+    right: 24px;
+    width: 58px;
+    height: 58px;
     border-radius: 50%;
-    color: white;
+    background: radial-gradient(circle at 30% 30%, #b300ff, #6f00ff);
+    box-shadow: 0 0 18px rgba(179,0,255,0.7);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 26px;
+    color: white;
+    font-size: 28px;
     cursor: pointer;
-    box-shadow: 0 0 14px rgba(111,0,255,0.4);
-    z-index: 9999;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    z-index: 99999;
+    transition: all 0.25s ease;
 }
-#kj6-operator-btn:hover {
-    transform: scale(1.07);
-    box-shadow: 0 0 20px rgba(179,0,255,0.7);
+#kj6-holo-btn:hover {
+    transform: scale(1.12);
+    box-shadow: 0 0 24px rgba(179,0,255,1);
 }
 
-/* ----- Panel ----- */
-#kj6-panel {
+/* HOLOGRAM PANEL */
+#kj6-holo {
     position: fixed;
-    bottom: 96px;
-    right: 28px;
-    width: 300px;
-    padding: 16px;
-    border-radius: 14px;
-    background: rgba(20,20,20,0.93);
-    backdrop-filter: blur(6px);
-    box-shadow: 0 0 20px rgba(0,0,0,0.5);
-    color: #efefef;
-    font-size: 14px;
+    bottom: 100px;
+    right: 24px;
+    width: 360px;
+    padding: 18px;
+    border-radius: 18px;
+    background: rgba(30,30,30,0.35);
+    backdrop-filter: blur(14px) saturate(160%);
+    border: 1px solid rgba(200,100,255,0.35);
+    box-shadow: 0 0 28px rgba(160,0,255,0.35);
+    color: #eee;
     display: none;
-    z-index: 9999;
-    animation: fadein 0.25s ease;
+    z-index: 99999;
+    animation: holoIn 0.3s ease forwards;
+    user-select: none;
+}
+@keyframes holoIn {
+    from { opacity: 0; transform: scale(0.95) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
-@keyframes fadein {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-#kj6-panel input,
-#kj6-panel textarea {
+/* Inputs */
+#kj6-holo input,
+#kj6-holo textarea {
     width: 100%;
-    background: #151515;
-    border: 1px solid #333;
-    color: #efefef;
-    padding: 8px;
-    border-radius: 6px;
-    margin-bottom: 10px;
+    background: rgba(0,0,0,0.55);
+    border: 1px solid rgba(150,60,255,0.5);
+    color: #f0e6ff;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 12px;
     font-size: 13px;
+    outline: none;
 }
-
-#kj6-panel textarea {
-    min-height: 80px;
+#kj6-holo textarea {
+    min-height: 90px;
     resize: vertical;
 }
 
-#kj6-panel button {
+/* Button */
+#kj6-holo button {
     width: 100%;
-    background: linear-gradient(135deg,#6f00ff,#b300ff);
+    background: linear-gradient(135deg,#9a00ff,#d600ff);
     border: none;
-    padding: 10px;
-    border-radius: 8px;
-    cursor: pointer;
+    padding: 11px;
+    border-radius: 12px;
     color: white;
     font-weight: bold;
-    margin-top: 6px;
-    transition: background 0.25s;
+    cursor: pointer;
+    transition: all 0.25s ease;
 }
-#kj6-panel button:hover {
-    background: linear-gradient(135deg,#8a2bff,#d336ff);
+#kj6-holo button:hover {
+    background: linear-gradient(135deg,#bd4cff,#e044ff);
 }
 
 /* Status Log */
-#kj6-status {
-    margin-top: 10px;
+#kj6-holo-status {
+    margin-top: 12px;
     font-size: 12px;
-    color: #bbb;
-    white-space: pre-wrap;
-    max-height: 120px;
+    color: #cfaaff;
+    max-height: 140px;
     overflow-y: auto;
+    white-space: pre-wrap;
 }
 </style>
 
-<!-- OPERATOR BUTTON -->
-<div id="kj6-operator-btn">⚡</div>
+<!-- Trigger Button -->
+<div id="kj6-holo-btn">⚡</div>
 
-<!-- PANEL -->
-<div id="kj6-panel">
-    <h3 style="margin-top:0;margin-bottom:8px;font-size:15px;">⚡ KJ6 Operator</h3>
-    <input id="kj6-file" value="index_navigation.html" placeholder="Dateiname">
+<!-- Hologram Panel -->
+<div id="kj6-holo">
+    <h3 style="margin:0 0 10px;font-size:17px;font-weight:600;color:#e8d2ff;">⚡ KJ6 Holo-Operator</h3>
+    <input id="kj6-file" value="index_navigation.html">
     <textarea id="kj6-desc" placeholder="Beschreibung eingeben..."></textarea>
-    <button onclick="kj6Send()">Update starten</button>
-    <div id="kj6-status"></div>
+    <button onclick="kj6Send()">Update Triggern</button>
+    <div id="kj6-holo-status"></div>
 </div>
 
 <script>
-const kj6Btn = document.getElementById("kj6-operator-btn");
-const kj6Panel = document.getElementById("kj6-panel");
+const holoBtn = document.getElementById("kj6-holo-btn");
+const holo = document.getElementById("kj6-holo");
 
-kj6Btn.onclick = () => {
-    kj6Panel.style.display =
-        kj6Panel.style.display === "none" || kj6Panel.style.display === ""
+holoBtn.onclick = () => {
+    holo.style.display =
+        holo.style.display === "none" || holo.style.display === ""
         ? "block"
         : "none";
 };
 
 async function kj6Send() {
-    const file = document.getElementById("kj6-file").value;
-    const desc = document.getElementById("kj6-desc").value;
-    const status = document.getElementById("kj6-status");
+    const f = document.getElementById("kj6-file").value;
+    const d = document.getElementById("kj6-desc").value;
+    const log = document.getElementById("kj6-holo-status");
 
-    status.textContent = "⏳ Sende Anfrage...";
+    log.textContent = "⏳ Sende Update an KJ6-Agent...\n";
 
     try {
         const res = await fetch("https://aurora-core.duckdns.org:5678/webhook/kj6-update", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ file, description: desc })
+            body: JSON.stringify({ file: f, description: d })
         });
 
-        const txt = await res.text();
-        status.textContent = "✔ Antwort:\n" + txt;
-    } catch (err) {
-        status.textContent = "❌ Fehler:\n" + err;
+        const text = await res.text();
+        log.textContent += "✔ Antwort:\n" + text;
+    } catch(err) {
+        log.textContent += "❌ Fehler:\n" + err;
     }
 }
 </script>
-<!-- KJ6 OPERATOR PANEL – END -->
+<!-- KJ6 HOLOGRAM PANEL – END -->
+
 
 </body>
 </html>
