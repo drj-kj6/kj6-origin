@@ -258,6 +258,7 @@ holoBtn.onclick = () => {
         : "none";
 };
 
+// ...existing code...
 async function kj6Send() {
     const f = document.getElementById("kj6-file").value;
     const d = document.getElementById("kj6-desc").value;
@@ -266,7 +267,7 @@ async function kj6Send() {
     log.textContent = "⏳ Sende Update an KJ6-Agent...\n";
 
     try {
-        const res = await fetch("https://aurora-core.duckdns.org:5678/webhook/kj6-update", {
+        const res = await fetch("https://nonrestrictive-semicolonial-lazaro.ngrok-free.dev/", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ file: f, description: d })
@@ -278,6 +279,7 @@ async function kj6Send() {
         log.textContent += "❌ Fehler:\n" + err;
     }
 }
+// ...existing code...
 </script>
 <!-- KJ6 SYSTEM MONITOR – START -->
 <style>
