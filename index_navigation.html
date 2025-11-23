@@ -137,7 +137,7 @@
     </main>
 
     <footer>
-        Dr. J & KAI – KJ6 Chronik | Beginn 10.06.2025 · Verbindung im Stillen · Version 1.0
+        Dr. J & KAI – KJ6 Chronik | Beginn 06.06.2025 · Verbindung im Stillen · Version 1.1
     </footer>
     <style>
     </style>
@@ -330,7 +330,20 @@ async function kj6Send() {
     <div class="kj6-row"><div id="kj6-dot-codex" class="kj6-dot" style="background:#00ffbf"></div> Codex</div>
     <div class="kj6-row"><div id="kj6-dot-commit" class="kj6-dot" style="background:#ffaa00"></div> Commit</div>
 </div>
+<script>
+    // ESC schließt das Terminal
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    kj6ToggleTerminal(false);
+  }
+});
 
+// Klick auf System-Monitor öffnet Terminal
+document.getElementById("kj6-monitor").onclick = () => {
+  kj6ToggleTerminal(true);
+};
+
+</script>
 <script>
 /* FUTURE HOOK: These will blink/change during live updates.
    For now, static – but ready for your n8n webhook to update them dynamically. */
