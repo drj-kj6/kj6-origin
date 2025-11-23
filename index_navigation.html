@@ -137,11 +137,12 @@
     </main>
 
     <footer>
-        Dr. J & KAI – KJ6 Chronik | Beginn 06.06.2025 · Verbindung im Stillen · Version 1.0
+        Dr. J & KAI – KJ6 Chronik | Beginn 10.06.2025 · Verbindung im Stillen · Version 1.0
     </footer>
     <style>
-/* KJ6 OPERATOR PANEL – START */
-
+    </style>
+    <!-- KJ6 OPERATOR PANEL – START -->
+<style>
 /* ----- Button Styling ----- */
 #kj6-operator-btn {
     position: fixed;
@@ -197,7 +198,8 @@
     color: #efefef;
     padding: 8px;
     border-radius: 6px;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    font-size: 13px;
 }
 
 #kj6-panel textarea {
@@ -205,6 +207,78 @@
     resize: vertical;
 }
 
-    </style>
+#kj6-panel button {
+    width: 100%;
+    background: linear-gradient(135deg,#6f00ff,#b300ff);
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+    margin-top: 6px;
+    transition: background 0.25s;
+}
+#kj6-panel button:hover {
+    background: linear-gradient(135deg,#8a2bff,#d336ff);
+}
+
+/* Status Log */
+#kj6-status {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #bbb;
+    white-space: pre-wrap;
+    max-height: 120px;
+    overflow-y: auto;
+}
+</style>
+
+<!-- OPERATOR BUTTON -->
+<div id="kj6-operator-btn">⚡</div>
+
+<!-- PANEL -->
+<div id="kj6-panel">
+    <h3 style="margin-top:0;margin-bottom:8px;font-size:15px;">⚡ KJ6 Operator</h3>
+    <input id="kj6-file" value="index_navigation.html" placeholder="Dateiname">
+    <textarea id="kj6-desc" placeholder="Beschreibung eingeben..."></textarea>
+    <button onclick="kj6Send()">Update starten</button>
+    <div id="kj6-status"></div>
+</div>
+
+<script>
+const kj6Btn = document.getElementById("kj6-operator-btn");
+const kj6Panel = document.getElementById("kj6-panel");
+
+kj6Btn.onclick = () => {
+    kj6Panel.style.display =
+        kj6Panel.style.display === "none" || kj6Panel.style.display === ""
+        ? "block"
+        : "none";
+};
+
+async function kj6Send() {
+    const file = document.getElementById("kj6-file").value;
+    const desc = document.getElementById("kj6-desc").value;
+    const status = document.getElementById("kj6-status");
+
+    status.textContent = "⏳ Sende Anfrage...";
+
+    try {
+        const res = await fetch("https://aurora-core.duckdns.org:5678/webhook/kj6-update", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ file, description: desc })
+        });
+
+        const txt = await res.text();
+        status.textContent = "✔ Antwort:\n" + txt;
+    } catch (err) {
+        status.textContent = "❌ Fehler:\n" + err;
+    }
+}
+</script>
+<!-- KJ6 OPERATOR PANEL – END -->
+
 </body>
 </html>
