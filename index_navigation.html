@@ -346,6 +346,71 @@ function kj6SetStatus(step, color) {
 // kj6SetStatus("kj6-dot-codex", "#d600ff");
 // kj6SetStatus("kj6-dot-commit", "#44ff44");
 </script>
+<script>
+/* --- STATUS HANDLING --- */
+function kj6ApplyStatus(statusObj) {
+    if (!statusObj || !statusObj.steps) return;
+
+    const steps = statusObj.steps;
+
+    // GPT-5 CREATION
+    if (steps.gpt_generated)
+        kj6SetStatus("kj6-dot-gpt", "#b300ff");
+
+    // VALIDATOR PASS
+    if (steps.validator_passed)
+        kj6SetStatus("kj6-dot-val", "#00d0ff");
+
+    // VALIDATOR FAIL
+    if (steps.validator_failed)
+        kj6SetStatus("kj6-dot-val", "#ff0033");
+
+    // CODEX DONE
+    if (steps.codex_done)
+        kj6SetStatus("kj6-dot-codex", "#00ff88");
+
+    // COMMIT SUCCESS
+    if (steps.commit_success)
+        kj6SetStatus("kj6-dot-commit", "#ffaa00");
+
+    // COMMIT FAIL
+    if (steps.commit_failed)
+        kj6SetStatus("kj6-dot-commit", "#ff3300");
+}
+
+/* --- AUGMENT THE EXISTING SEND FUNCTION --- */
+async function kj6Send() {
+    const f = document.getElementById("kj6-file").value;
+    const d = document.getElementById("kj6-desc").value;
+    const log = document.getElementById("kj6-holo-status");
+
+    log.textContent = "⏳ Sende Update an KJ6-Agent...\n";
+
+    try {
+        const res = await fetch("https://aurora-core.duckdns.org:5678/webhook/kj6-update", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ file: f, description: d })
+        });
+
+        const text = await res.text();
+        log.textContent += "✔ Antwort:\n" + text;
+
+        // Try to parse for status
+        try {
+            const json = JSON.parse(text);
+            kj6ApplyStatus(json);
+        } catch {
+            log.textContent += "\n⚠️ Konnte Status nicht parsen.";
+        }
+
+    } catch(err) {
+        log.textContent += "❌ Fehler:\n" + err;
+        kj6SetStatus("kj6-dot-commit", "#ff3300");
+    }
+}
+</script>
+
 <!-- KJ6 SYSTEM MONITOR – END -->
 
 
