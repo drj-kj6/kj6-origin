@@ -378,7 +378,6 @@ function kj6ApplyStatus(statusObj) {
         kj6SetStatus("kj6-dot-commit", "#ff3300");
 }
 
-/* --- AUGMENT THE EXISTING SEND FUNCTION --- */
 async function kj6Send() {
     const f = document.getElementById("kj6-file").value;
     const d = document.getElementById("kj6-desc").value;
@@ -396,12 +395,11 @@ async function kj6Send() {
         const text = await res.text();
         log.textContent += "✔ Antwort:\n" + text;
 
-        // Try to parse for status
         try {
             const json = JSON.parse(text);
             kj6ApplyStatus(json);
-        } catch {
-            log.textContent += "\n⚠️ Konnte Status nicht parsen.";
+        } catch (e) {
+            log.textContent += "\n⚠️ JSON konnte nicht gelesen werden.";
         }
 
     } catch(err) {
@@ -409,6 +407,7 @@ async function kj6Send() {
         kj6SetStatus("kj6-dot-commit", "#ff3300");
     }
 }
+
 </script>
 
 <!-- KJ6 SYSTEM MONITOR – END -->
