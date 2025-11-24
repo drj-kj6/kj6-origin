@@ -267,7 +267,7 @@ async function kj6Send() {
     log.textContent = "⏳ Sende Update an KJ6-Agent...\n";
 
     try {
-        const res = await fetch("https://nonrestrictive-semicolonial-lazaro.ngrok-free.dev/", {
+        const res = await fetch("https://aurora-core.duckdns.org/webhook/kj6-update", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ file: f, description: d })
