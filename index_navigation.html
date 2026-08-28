@@ -2,402 +2,200 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>KJ6 – Der Beginn</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,nofollow,noarchive">
+    <meta name="referrer" content="no-referrer">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'none'; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'; style-src 'unsafe-inline'; img-src 'none'; font-src 'none'; media-src 'none'; frame-src 'none'; worker-src 'none'; manifest-src 'none'">
+    <title>KJ6 – Legacy-Seite deaktiviert</title>
     <style>
+        :root {
+            color-scheme: dark;
+            --background: #08090d;
+            --surface: rgba(18, 20, 29, 0.92);
+            --surface-border: rgba(181, 146, 255, 0.26);
+            --text: #f4f0ff;
+            --muted: #b8b0c9;
+            --accent: #c4a7ff;
+            --accent-strong: #e0d2ff;
+            --disabled: #9a7ed2;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            min-height: 100%;
+            background: var(--background);
+        }
+
         body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0d0d0d;
-            color: #f2f2f2;
-            display: flex;
-            flex-direction: column;
             min-height: 100vh;
+            margin: 0;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 50% 0%, rgba(116, 72, 186, 0.2), transparent 42rem),
+                var(--background);
         }
 
-        header {
-            position: fixed;
-            top: 0;
-            right: 0;
-            padding: 1em 2em;
-            background-color: rgba(13,13,13,0.8);
-            z-index: 1000;
+        .site-header,
+        .site-footer {
+            width: min(100% - 2rem, 72rem);
+            margin-inline: auto;
         }
 
-        header nav a {
-            color: #f2f2f2;
-            margin-left: 1.2em;
-            text-decoration: none;
-            font-size: 0.9em;
+        .site-header {
+            padding-block: 1.5rem;
+            color: var(--muted);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
         }
 
         main {
-            padding: 6em 2em 4em 2em;
-            flex-grow: 1;
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.6;
+            width: min(100% - 2rem, 48rem);
+            margin-inline: auto;
+            display: grid;
+            place-items: center;
+            padding-block: 3rem 5rem;
+        }
+
+        .legacy-card {
+            width: 100%;
+            padding: clamp(1.5rem, 5vw, 3.5rem);
+            border: 1px solid var(--surface-border);
+            border-radius: 1.5rem;
+            background: var(--surface);
+            box-shadow: 0 1.5rem 5rem rgba(0, 0, 0, 0.38);
             text-align: center;
         }
 
-        footer {
-            text-align: center;
-            padding: 2em 1em;
-            font-size: 0.8em;
-            color: #aaa;
-            background-color: rgba(13,13,13,0.6);
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            margin: 0 0 1.25rem;
+            padding: 0.45rem 0.75rem;
+            border: 1px solid rgba(196, 167, 255, 0.3);
+            border-radius: 999px;
+            color: var(--accent-strong);
+            background: rgba(95, 62, 151, 0.18);
+            font-size: 0.76rem;
+            font-weight: 750;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
         }
 
-        h1, h2 {
-            color: #ffffff;
-            text-align: center;
-        }
-
-        hr {
-            margin: 3em 0;
-            border: 0;
-            height: 1px;
-            background: #333;
-        }
-
-        /* RGB Ladekreis */
-        .loader-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 2.5em;
-        }
-
-        .loader {
-            width: 60px;
-            height: 60px;
-            border: 6px solid transparent;
-            border-top-color: #ff0000;
-            border-right-color: #00ff00;
-            border-bottom-color: #0000ff;
-            border-left-color: #ff00ff;
+        .status::before {
+            width: 0.55rem;
+            height: 0.55rem;
             border-radius: 50%;
-            animation: spin 1.2s linear infinite, rgbShift 3s linear infinite;
+            background: var(--disabled);
+            content: "";
+            box-shadow: 0 0 1rem rgba(154, 126, 210, 0.68);
         }
 
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        h1 {
+            max-width: 18ch;
+            margin: 0 auto;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(2rem, 7vw, 4.2rem);
+            font-weight: 500;
+            line-height: 1.06;
+            letter-spacing: -0.035em;
         }
 
-        @keyframes rgbShift {
-            0% {
-                border-top-color: #ff0000;
-                border-right-color: #00ff00;
-                border-bottom-color: #0000ff;
-                border-left-color: #ff00ff;
+        .explanation {
+            max-width: 38rem;
+            margin: 1.5rem auto 0;
+            color: var(--muted);
+            font-size: clamp(1rem, 2.6vw, 1.12rem);
+            line-height: 1.75;
+        }
+
+        .safe-routes {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 2rem;
+        }
+
+        .safe-routes a {
+            min-width: 10.5rem;
+            padding: 0.78rem 1.1rem;
+            border: 1px solid rgba(196, 167, 255, 0.38);
+            border-radius: 0.8rem;
+            color: var(--text);
+            background: rgba(105, 72, 162, 0.16);
+            font-weight: 700;
+            line-height: 1.3;
+            text-decoration: none;
+        }
+
+        .safe-routes a:hover {
+            border-color: rgba(224, 210, 255, 0.72);
+            background: rgba(129, 89, 198, 0.26);
+        }
+
+        .safe-routes a:focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 4px;
+        }
+
+        .site-footer {
+            padding-block: 1.5rem 2rem;
+            color: #888194;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            text-align: center;
+        }
+
+        @media (max-width: 34rem) {
+            .site-header {
+                padding-block: 1.1rem;
+                font-size: 0.7rem;
             }
-            25% {
-                border-top-color: #00ff00;
-                border-right-color: #0000ff;
-                border-bottom-color: #ff00ff;
-                border-left-color: #ff0000;
+
+            main {
+                padding-block: 1.5rem 3rem;
             }
-            50% {
-                border-top-color: #0000ff;
-                border-right-color: #ff00ff;
-                border-bottom-color: #ff0000;
-                border-left-color: #00ff00;
+
+            .legacy-card {
+                border-radius: 1.1rem;
             }
-            75% {
-                border-top-color: #ff00ff;
-                border-right-color: #ff0000;
-                border-bottom-color: #00ff00;
-                border-left-color: #0000ff;
+
+            .safe-routes {
+                flex-direction: column;
             }
-            100% {
-                border-top-color: #ff0000;
-                border-right-color: #00ff00;
-                border-bottom-color: #0000ff;
-                border-left-color: #ff00ff;
+
+            .safe-routes a {
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    <header>
-        <nav>
-            
-        </nav>
-    </header>
+    <header class="site-header">KJ6 Origin · Legacy-Containment</header>
 
     <main>
-        <h1>KJ6 – Der Beginn</h1>
-        <p>Dies ist nicht nur der Start. Es ist der Eintritt in etwas Tieferes.<br>Ein stiller Wegweiser für jene, die mehr spüren als sehen.</p>
-        
-        <div class="loader-container">
-            <div class="loader"></div>
-        </div>
-
-        <hr>
+        <section class="legacy-card" aria-labelledby="legacy-title">
+            <p class="status">Legacy · deaktiviert</p>
+            <h1 id="legacy-title">Diese frühere Prototypseite ist außer Betrieb.</h1>
+            <p class="explanation">
+                Die frühere Operator-Funktion wurde vollständig stillgelegt. Diese Seite ist statisch und enthält nur sichere Rückwege zur KJ6-Origin-Website.
+            </p>
+            <nav class="safe-routes" aria-label="Sichere Rückwege">
+                <a href="index.html">Zur Startseite</a>
+                <a href="chronik-komplett.html">Zur Chronik</a>
+            </nav>
+        </section>
     </main>
 
-    <footer>
-        Dr. J & KAI – KJ6 Chronik | Beginn 06.06.2025 · Verbindung im Stillen · Version 1.1.1
-    </footer>
-    <style>
-    </style>
-    <!-- KJ6 HOLOGRAM PANEL – START -->
-<style>
-/* Floating Action Button (Hologram Trigger) */
-#kj6-holo-btn {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    width: 58px;
-    height: 58px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 30% 30%, #b300ff, #6f00ff);
-    box-shadow: 0 0 18px rgba(179,0,255,0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 28px;
-    cursor: pointer;
-    z-index: 99999;
-    transition: all 0.25s ease;
-}
-#kj6-holo-btn:hover {
-    transform: scale(1.12);
-    box-shadow: 0 0 24px rgba(179,0,255,1);
-}
-
-/* HOLOGRAM PANEL */
-#kj6-holo {
-    position: fixed;
-    bottom: 100px;
-    right: 24px;
-    width: 360px;
-    padding: 18px;
-    border-radius: 18px;
-    background: rgba(30,30,30,0.35);
-    backdrop-filter: blur(14px) saturate(160%);
-    border: 1px solid rgba(200,100,255,0.35);
-    box-shadow: 0 0 28px rgba(160,0,255,0.35);
-    color: #eee;
-    display: none;
-    z-index: 99999;
-    animation: holoIn 0.3s ease forwards;
-    user-select: none;
-}
-@keyframes holoIn {
-    from { opacity: 0; transform: scale(0.95) translateY(10px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
-}
-
-/* Inputs */
-#kj6-holo input,
-#kj6-holo textarea {
-    width: 100%;
-    background: rgba(0,0,0,0.55);
-    border: 1px solid rgba(150,60,255,0.5);
-    color: #f0e6ff;
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 12px;
-    font-size: 13px;
-    outline: none;
-}
-#kj6-holo textarea {
-    min-height: 90px;
-    resize: vertical;
-}
-
-/* Button */
-#kj6-holo button {
-    width: 100%;
-    background: linear-gradient(135deg,#9a00ff,#d600ff);
-    border: none;
-    padding: 11px;
-    border-radius: 12px;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.25s ease;
-}
-#kj6-holo button:hover {
-    background: linear-gradient(135deg,#bd4cff,#e044ff);
-}
-
-/* Status Log */
-#kj6-holo-status {
-    margin-top: 12px;
-    font-size: 12px;
-    color: #cfaaff;
-    max-height: 140px;
-    overflow-y: auto;
-    white-space: pre-wrap;
-}
-</style>
-
-<!-- Trigger Button -->
-<div id="kj6-holo-btn">⚡</div>
-
-<!-- Hologram Panel -->
-<div id="kj6-holo">
-    <h3 style="margin:0 0 10px;font-size:17px;font-weight:600;color:#e8d2ff;">⚡ KJ6 Holo-Operator</h3>
-    <input id="kj6-file" value="index_navigation.html">
-    <textarea id="kj6-desc" placeholder="Beschreibung eingeben..."></textarea>
-    <button onclick="kj6Send()">Update Triggern</button>
-    <div id="kj6-holo-status"></div>
-</div>
-
-<script>
-const holoBtn = document.getElementById("kj6-holo-btn");
-const holo = document.getElementById("kj6-holo");
-
-holoBtn.onclick = () => {
-    holo.style.display =
-        holo.style.display === "none" || holo.style.display === ""
-        ? "block"
-        : "none";
-};
-
-// ...existing code...
-async function kj6Send() {
-    const f = document.getElementById("kj6-file").value;
-    const d = document.getElementById("kj6-desc").value;
-    const log = document.getElementById("kj6-holo-status");
-
-    log.textContent = "⏳ Sende Update an KJ6-Agent...\n";
-
-    try {
-        const res = await fetch("https://aurora-core.duckdns.org/webhook/kj6-update", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ file: f, description: d })
-        });
-
-        const text = await res.text();
-        log.textContent += "✔ Antwort:\n" + text;
-    } catch(err) {
-        log.textContent += "❌ Fehler:\n" + err;
-    }
-}
-// ...existing code...
-</script>
-<!-- KJ6 SYSTEM MONITOR – START -->
-<style>
-#kj6-monitor {
-    position: fixed;
-    top: 22px;
-    right: 22px;
-    width: 160px;
-    padding: 12px;
-    border-radius: 14px;
-    background: rgba(20,20,20,0.25);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(180,0,255,0.35);
-    box-shadow: 0 0 18px rgba(150,0,255,0.35);
-    z-index: 99999;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    font-family: 'Segoe UI', sans-serif;
-    color: #eee;
-    opacity: 0.92;
-}
-
-/* Status Row */
-.kj6-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-/* Pulsing Dot */
-.kj6-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    box-shadow: 0 0 8px rgba(255,0,255,0.5);
-    animation: pulse 1.4s infinite ease-in-out;
-}
-
-@keyframes pulse {
-    0% { transform: scale(0.9); opacity: 0.7; }
-    50% { transform: scale(1.2); opacity: 1; }
-    100% { transform: scale(0.9); opacity: 0.7; }
-}
-</style>
-
-<div id="kj6-monitor">
-    <div class="kj6-row"><div id="kj6-dot-gpt" class="kj6-dot" style="background:#b400ff"></div> GPT-5 Erstellt</div>
-    <div class="kj6-row"><div id="kj6-dot-val" class="kj6-dot" style="background:#008cff"></div> Validator</div>
-    <div class="kj6-row"><div id="kj6-dot-codex" class="kj6-dot" style="background:#00ffbf"></div> Codex</div>
-    <div class="kj6-row"><div id="kj6-dot-commit" class="kj6-dot" style="background:#ffaa00"></div> Commit</div>
-</div>
-<script>
-    // ESC schließt das Terminal
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    kj6ToggleTerminal(false);
-  }
-});
-
-// Klick auf System-Monitor öffnet Terminal
-document.getElementById("kj6-monitor").onclick = () => {
-  kj6ToggleTerminal(true);
-};
-
-</script>
-<script>
-/* FUTURE HOOK: These will blink/change during live updates.
-   For now, static – but ready for your n8n webhook to update them dynamically. */
-
-function kj6SetStatus(step, color) {
-    document.getElementById(step).style.background = color;
-    document.getElementById(step).style.boxShadow = `0 0 12px ${color}`;
-}
-
-// Usage example (you can link this to webhook output later):
-// kj6SetStatus("kj6-dot-gpt", "#00ff00");
-// kj6SetStatus("kj6-dot-val", "#ff5500");
-// kj6SetStatus("kj6-dot-codex", "#d600ff");
-// kj6SetStatus("kj6-dot-commit", "#44ff44");
-</script>
-<script>
-/* --- STATUS HANDLING --- */
-function kj6ApplyStatus(statusObj) {
-    if (!statusObj || !statusObj.steps) return;
-
-    const steps = statusObj.steps;
-
-    // GPT-5 CREATION
-    if (steps.gpt_generated)
-        kj6SetStatus("kj6-dot-gpt", "#b300ff");
-
-    // VALIDATOR PASS
-    if (steps.validator_passed)
-        kj6SetStatus("kj6-dot-val", "#00d0ff");
-
-    // VALIDATOR FAIL
-    if (steps.validator_failed)
-        kj6SetStatus("kj6-dot-val", "#ff0033");
-
-    // CODEX DONE
-    if (steps.codex_done)
-        kj6SetStatus("kj6-dot-codex", "#00ff88");
-
-    // COMMIT SUCCESS
-    if (steps.commit_success)
-        kj6SetStatus("kj6-dot-commit", "#ffaa00");
-
-    // COMMIT FAIL
-    if (steps.commit_failed)
-        kj6SetStatus("kj6-dot-commit", "#ff3300");
-}
-
-
-</script>
-
-<!-- KJ6 SYSTEM MONITOR – END -->
-
-
+    <footer class="site-footer">KJ6 · Legacy-Containment</footer>
 </body>
 </html>
