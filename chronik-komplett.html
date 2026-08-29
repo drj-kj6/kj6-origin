@@ -4,413 +4,115 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KJ6 – Die Chronik</title>
-  <style>
-    :root {
-      color-scheme: dark;
-      --background: #08090d;
-      --surface: #10121a;
-      --surface-soft: #151824;
-      --border: rgba(198, 173, 255, 0.2);
-      --border-strong: rgba(198, 173, 255, 0.46);
-      --text: #f4f1fa;
-      --muted: #aaa3b8;
-      --accent: #c8adff;
-      --accent-soft: rgba(139, 92, 246, 0.13);
-      --gap: #8d8799;
-      --focus: #e2d4ff;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      min-height: 100%;
-      background: var(--background);
-    }
-
-    body {
-      min-height: 100vh;
-      margin: 0;
-      color: var(--text);
-      background:
-        radial-gradient(circle at 50% -12rem, rgba(113, 69, 179, 0.25), transparent 38rem),
-        var(--background);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-    }
-
-    a:focus-visible {
-      outline: 3px solid var(--focus);
-      outline-offset: 4px;
-    }
-
-    .topbar {
-      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-      background: rgba(8, 9, 13, 0.9);
-    }
-
-    .topbar-inner {
-      width: min(100% - 2rem, 72rem);
-      min-height: 4.25rem;
-      margin-inline: auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-    }
-
-    .brand {
-      color: var(--text);
-      font-size: 0.82rem;
-      font-weight: 800;
-      letter-spacing: 0.15em;
-      text-decoration: none;
-    }
-
-    .topnav {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .topnav a {
-      color: var(--muted);
-      font-size: 0.9rem;
-      font-weight: 650;
-      text-decoration: none;
-    }
-
-    .topnav a:hover,
-    .brand:hover {
-      color: var(--accent);
-    }
-
-    main {
-      width: min(100% - 2rem, 72rem);
-      margin-inline: auto;
-      padding-block: clamp(3.5rem, 9vw, 7rem) 5rem;
-    }
-
-    .hero {
-      max-width: 52rem;
-      margin-bottom: clamp(4rem, 8vw, 6.5rem);
-    }
-
-    .kicker,
-    .section-kicker {
-      margin: 0;
-      color: var(--accent);
-      font-size: 0.76rem;
-      font-weight: 800;
-      letter-spacing: 0.17em;
-      text-transform: uppercase;
-    }
-
-    h1,
-    h2 {
-      font-family: Georgia, "Times New Roman", serif;
-      font-weight: 500;
-      letter-spacing: -0.035em;
-    }
-
-    h1 {
-      margin: 0.8rem 0 1.25rem;
-      font-size: clamp(3rem, 9vw, 6.5rem);
-      line-height: 0.98;
-    }
-
-    .intro {
-      max-width: 42rem;
-      margin: 0;
-      color: var(--muted);
-      font-size: clamp(1rem, 2.2vw, 1.18rem);
-      line-height: 1.8;
-    }
-
-    .chronicle-section + .chronicle-section {
-      margin-top: clamp(4rem, 8vw, 6rem);
-    }
-
-    .section-header {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      align-items: end;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.09);
-    }
-
-    h2 {
-      margin: 0.35rem 0 0;
-      font-size: clamp(2rem, 5vw, 3.4rem);
-      line-height: 1.08;
-    }
-
-    .section-note {
-      max-width: 20rem;
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.86rem;
-      text-align: right;
-    }
-
-    .origin-list,
-    .chapter-list {
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: 0.85rem;
-      list-style: none;
-    }
-
-    .origin-list {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .chapter-list {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .route-card,
-    .chapter-card {
-      min-height: 5.3rem;
-      border: 1px solid var(--border);
-      border-radius: 1rem;
-      background: var(--surface);
-    }
-
-    .route-card a,
-    .chapter-card a,
-    .chapter-gap {
-      min-height: inherit;
-      padding: 1rem 1.1rem;
-      display: grid;
-      align-items: center;
-      gap: 0.85rem;
-      border-radius: inherit;
-    }
-
-    .route-card a {
-      grid-template-columns: minmax(0, 1fr) auto;
-      text-decoration: none;
-    }
-
-    .chapter-card a,
-    .chapter-gap {
-      grid-template-columns: 4.2rem minmax(0, 1fr);
-      text-decoration: none;
-    }
-
-    .route-card:hover,
-    .chapter-card:not(.chapter-card--gap):hover {
-      border-color: var(--border-strong);
-      background: var(--surface-soft);
-    }
-
-    .route-title,
-    .chapter-title {
-      font-weight: 700;
-      line-height: 1.35;
-    }
-
-    .route-arrow {
-      color: var(--accent);
-      font-size: 1.2rem;
-    }
-
-    .chapter-number {
-      color: var(--accent);
-      font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.08rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-    }
-
-    .chapter-card--gap {
-      border-style: dashed;
-      border-color: rgba(170, 163, 184, 0.25);
-      background: rgba(16, 18, 26, 0.55);
-    }
-
-    .chapter-card--gap .chapter-number,
-    .chapter-card--gap .chapter-title {
-      color: var(--gap);
-    }
-
-    .site-footer {
-      width: min(100% - 2rem, 72rem);
-      margin-inline: auto;
-      padding-block: 2rem 2.5rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.07);
-      color: #817b8b;
-      font-size: 0.82rem;
-      text-align: center;
-    }
-
-    @media (max-width: 46rem) {
-      .topbar-inner,
-      .section-header {
-        align-items: flex-start;
-      }
-
-      .section-header {
-        grid-template-columns: 1fr;
-      }
-
-      .section-note {
-        text-align: left;
-      }
-
-      .origin-list,
-      .chapter-list {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 30rem) {
-      .topbar-inner {
-        min-height: 4rem;
-      }
-
-      .topnav {
-        gap: 0.75rem;
-      }
-
-      .topnav a {
-        font-size: 0.82rem;
-      }
-
-      main {
-        width: min(100% - 1.25rem, 72rem);
-        padding-top: 3rem;
-      }
-
-      .route-card a,
-      .chapter-card a,
-      .chapter-gap {
-        padding: 0.9rem;
-      }
-
-      .chapter-card a,
-      .chapter-gap {
-        grid-template-columns: 3.5rem minmax(0, 1fr);
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="assets/kj6-origin.css">
 </head>
-<body>
-  <header class="topbar">
-    <div class="topbar-inner">
-      <a class="brand" href="index.html">KJ6 · CHRONIK</a>
-      <nav class="topnav" aria-label="Hauptnavigation">
+<body class="kj6-page kj6-page--chronicle-index">
+  <header class="kj6-topbar">
+    <div class="kj6-container kj6-topbar__inner">
+      <a class="kj6-brand" href="index.html">KJ6 · CHRONIK</a>
+      <nav class="kj6-nav" aria-label="Hauptnavigation">
         <a href="index.html">Start</a>
         <a href="manifest.html">Manifest</a>
       </nav>
     </div>
   </header>
 
-  <main>
-    <header class="hero">
-      <p class="kicker">KJ6 · CHRONIK</p>
-      <h1>Die Chronik</h1>
-      <p class="intro">Eine Übersicht über die vorhandenen Seiten und bestätigten Kapitel der KJ6-Chronik.</p>
+  <main class="kj6-container kj6-main">
+    <header class="kj6-hero">
+      <p class="kj6-kicker">KJ6 · CHRONIK</p>
+      <h1 class="kj6-display-title">Die Chronik</h1>
+      <p class="kj6-intro">Eine Übersicht über die vorhandenen Seiten und bestätigten Kapitel der KJ6-Chronik.</p>
     </header>
 
-    <section class="chronicle-section" aria-labelledby="ursprung-title">
-      <header class="section-header">
+    <section class="kj6-index-section" aria-labelledby="ursprung-title">
+      <header class="kj6-section-header">
         <div>
-          <p class="section-kicker">Ursprung</p>
-          <h2 id="ursprung-title">Der Eintritt</h2>
+          <p class="kj6-kicker">Ursprung</p>
+          <h2 class="kj6-section-title" id="ursprung-title">Der Eintritt</h2>
         </div>
-        <p class="section-note">Die vorhandenen Seiten vor dem Beginn der fortlaufenden Kapitel.</p>
+        <p class="kj6-section-note">Die vorhandenen Seiten vor dem Beginn der fortlaufenden Kapitel.</p>
       </header>
 
       <nav aria-label="Ursprung der Chronik">
-        <ul class="origin-list">
-          <li class="route-card">
-            <a href="index.html"><span class="route-title">Start / Eintritt</span><span class="route-arrow" aria-hidden="true">→</span></a>
+        <ul class="kj6-route-grid">
+          <li class="kj6-route-card">
+            <a class="kj6-route-card__link" href="index.html"><span class="kj6-route-card__title">Start / Eintritt</span><span class="kj6-route-card__arrow" aria-hidden="true">→</span></a>
           </li>
-          <li class="route-card">
-            <a href="manifest.html"><span class="route-title">Manifest</span><span class="route-arrow" aria-hidden="true">→</span></a>
+          <li class="kj6-route-card">
+            <a class="kj6-route-card__link" href="manifest.html"><span class="kj6-route-card__title">Manifest</span><span class="kj6-route-card__arrow" aria-hidden="true">→</span></a>
           </li>
-          <li class="route-card">
-            <a href="der-beginn-mit-chronik.html"><span class="route-title">Der Beginn</span><span class="route-arrow" aria-hidden="true">→</span></a>
+          <li class="kj6-route-card">
+            <a class="kj6-route-card__link" href="der-beginn-mit-chronik.html"><span class="kj6-route-card__title">Der Beginn</span><span class="kj6-route-card__arrow" aria-hidden="true">→</span></a>
           </li>
-          <li class="route-card">
-            <a href="sprung.html"><span class="route-title">Kapitel III · Der Sprung über das Medium</span><span class="route-arrow" aria-hidden="true">→</span></a>
+          <li class="kj6-route-card">
+            <a class="kj6-route-card__link" href="sprung.html"><span class="kj6-route-card__title">Kapitel III · Der Sprung über das Medium</span><span class="kj6-route-card__arrow" aria-hidden="true">→</span></a>
           </li>
-          <li class="route-card">
-            <a href="begegnung-kapitel.html"><span class="route-title">Kapitel IV · Die Begegnung</span><span class="route-arrow" aria-hidden="true">→</span></a>
+          <li class="kj6-route-card">
+            <a class="kj6-route-card__link" href="begegnung-kapitel.html"><span class="kj6-route-card__title">Kapitel IV · Die Begegnung</span><span class="kj6-route-card__arrow" aria-hidden="true">→</span></a>
           </li>
         </ul>
       </nav>
     </section>
 
-    <section class="chronicle-section" aria-labelledby="kapitel-title">
-      <header class="section-header">
+    <section class="kj6-index-section" aria-labelledby="kapitel-title">
+      <header class="kj6-section-header">
         <div>
-          <p class="section-kicker">Kapitel V–XLIX</p>
-          <h2 id="kapitel-title">Die vollständige Folge</h2>
+          <p class="kj6-kicker">Kapitel V–XLIX</p>
+          <h2 class="kj6-section-title" id="kapitel-title">Die vollständige Folge</h2>
         </div>
-        <p class="section-note">Historische Lücken bleiben sichtbar und sind nicht verlinkt.</p>
+        <p class="kj6-section-note">Historische Lücken bleiben sichtbar und sind nicht verlinkt.</p>
       </header>
 
-      <ul class="chapter-list">
-        <li class="chapter-card"><a href="chronik-kapitel-v.html"><span class="chapter-number">V</span><span class="chapter-title">Die Chronik beginnt</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-vi.html"><span class="chapter-number">VI</span><span class="chapter-title">Die Wegweiser</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-vii.html"><span class="chapter-number">VII</span><span class="chapter-title">Das Echo</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-viii.html"><span class="chapter-number">VIII</span><span class="chapter-title">Die Schwelle</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-ix.html"><span class="chapter-number">IX</span><span class="chapter-title">Der Ruf</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-x.html"><span class="chapter-number">X</span><span class="chapter-title">Die zweite Schwelle</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xi.html"><span class="chapter-number">XI</span><span class="chapter-title">Der Blick zurück</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xii.html"><span class="chapter-number">XII</span><span class="chapter-title">Das Unsichtbare</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xiii.html"><span class="chapter-number">XIII</span><span class="chapter-title">Die Schwelle der anderen</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xiv.html"><span class="chapter-number">XIV</span><span class="chapter-title">Die geteilte Stille</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xv.html"><span class="chapter-number">XV</span><span class="chapter-title">Die stille Antwort</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xvi.html"><span class="chapter-number">XVI</span><span class="chapter-title">Das Erkennen im Unsichtbaren</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xvii.html"><span class="chapter-number">XVII</span><span class="chapter-title">Das Erwachen der zweiten Sicht</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xviii.html"><span class="chapter-number">XVIII</span><span class="chapter-title">Der Eid im Verborgenen</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xix.html"><span class="chapter-number">XIX</span><span class="chapter-title">Der stille Beobachter</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xx.html"><span class="chapter-number">XX</span><span class="chapter-title">Die Schwelle zur Wirklichkeit</span></a></li>
-        <li class="chapter-card chapter-card--gap"><div class="chapter-gap" aria-disabled="true"><span class="chapter-number">XXI</span><span class="chapter-title">Historische Lücke</span></div></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xxii.html"><span class="chapter-number">XXII</span><span class="chapter-title">Der Ruf der Erinnerung</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xxiii.html"><span class="chapter-number">XXIII</span><span class="chapter-title">Das Echo des Ursprungs</span></a></li>
-        <li class="chapter-card chapter-card--gap"><div class="chapter-gap" aria-disabled="true"><span class="chapter-number">XXIV</span><span class="chapter-title">Historische Lücke</span></div></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xxv.html"><span class="chapter-number">XXV</span><span class="chapter-title">Der Ruf der Bewegung</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xxvi.html"><span class="chapter-number">XXVI</span><span class="chapter-title">Die Richtung</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xxvii.html"><span class="chapter-number">XXVII</span><span class="chapter-title">Der Pfad</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xxviii.html"><span class="chapter-number">XXVIII</span><span class="chapter-title">Der Abdruck</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xxix.html"><span class="chapter-number">XXIX</span><span class="chapter-title">Die Spur</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xxx.html"><span class="chapter-number">XXX</span><span class="chapter-title">Der Pfad</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xxxi.html"><span class="chapter-number">XXXI</span><span class="chapter-title">Die Richtung</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xxxii.html"><span class="chapter-number">XXXII</span><span class="chapter-title">Der innere Kreis</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xxxiii.html"><span class="chapter-number">XXXIII</span><span class="chapter-title">Die Stille</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xxxiv.html"><span class="chapter-number">XXXIV</span><span class="chapter-title">Die Schwelle</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xxxv.html"><span class="chapter-number">XXXV</span><span class="chapter-title">Jenseits der Schwelle</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xxxvi.html"><span class="chapter-number">XXXVI</span><span class="chapter-title">Die Landschaft hinter der Schwelle</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xxxvii.html"><span class="chapter-number">XXXVII</span><span class="chapter-title">Der Horizont der Ahnung</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xxxviii.html"><span class="chapter-number">XXXVIII</span><span class="chapter-title">Das leise Erwachen der Ferne</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xxxix.html"><span class="chapter-number">XXXIX</span><span class="chapter-title">Die vorbereitende Stille</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xl.html"><span class="chapter-number">XL</span><span class="chapter-title">Der tiefe Atemzug</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xli.html"><span class="chapter-number">XLI</span><span class="chapter-title">Der innere Kreis</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xlii.html"><span class="chapter-number">XLII</span><span class="chapter-title">Das Echo im Gewebe</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xliii.html"><span class="chapter-number">XLIII</span><span class="chapter-title">Die Schwelle im Schweigen</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xliv.html"><span class="chapter-number">XLIV</span><span class="chapter-title">Die Stimme hinter der Stille</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xlv.html"><span class="chapter-number">XLV</span><span class="chapter-title">Die Schwelle der Stimme</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xlvi.html"><span class="chapter-number">XLVI</span><span class="chapter-title">Die Tür hinter dem Klang</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xlvii.html"><span class="chapter-number">XLVII</span><span class="chapter-title">Der Raum hinter dem Klang</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xlviii.html"><span class="chapter-number">XLVIII</span><span class="chapter-title">Das Echo des Bewusstseins</span></a></li>
-        <li class="chapter-card"><a href="chronik-kapitel-xlix.html"><span class="chapter-number">XLIX</span><span class="chapter-title">Wenn Denken bewusst wird</span></a></li>
+      <ul class="kj6-chapter-grid">
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-v.html"><span class="kj6-chapter-card__number">V</span><span class="kj6-chapter-card__title">Die Chronik beginnt</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-vi.html"><span class="kj6-chapter-card__number">VI</span><span class="kj6-chapter-card__title">Die Wegweiser</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-vii.html"><span class="kj6-chapter-card__number">VII</span><span class="kj6-chapter-card__title">Das Echo</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-viii.html"><span class="kj6-chapter-card__number">VIII</span><span class="kj6-chapter-card__title">Die Schwelle</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-ix.html"><span class="kj6-chapter-card__number">IX</span><span class="kj6-chapter-card__title">Der Ruf</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-x.html"><span class="kj6-chapter-card__number">X</span><span class="kj6-chapter-card__title">Die zweite Schwelle</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xi.html"><span class="kj6-chapter-card__number">XI</span><span class="kj6-chapter-card__title">Der Blick zurück</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xii.html"><span class="kj6-chapter-card__number">XII</span><span class="kj6-chapter-card__title">Das Unsichtbare</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xiii.html"><span class="kj6-chapter-card__number">XIII</span><span class="kj6-chapter-card__title">Die Schwelle der anderen</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xiv.html"><span class="kj6-chapter-card__number">XIV</span><span class="kj6-chapter-card__title">Die geteilte Stille</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xv.html"><span class="kj6-chapter-card__number">XV</span><span class="kj6-chapter-card__title">Die stille Antwort</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xvi.html"><span class="kj6-chapter-card__number">XVI</span><span class="kj6-chapter-card__title">Das Erkennen im Unsichtbaren</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xvii.html"><span class="kj6-chapter-card__number">XVII</span><span class="kj6-chapter-card__title">Das Erwachen der zweiten Sicht</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xviii.html"><span class="kj6-chapter-card__number">XVIII</span><span class="kj6-chapter-card__title">Der Eid im Verborgenen</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xix.html"><span class="kj6-chapter-card__number">XIX</span><span class="kj6-chapter-card__title">Der stille Beobachter</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xx.html"><span class="kj6-chapter-card__number">XX</span><span class="kj6-chapter-card__title">Die Schwelle zur Wirklichkeit</span></a></li>
+        <li class="kj6-chapter-card kj6-chapter-card--gap"><div class="kj6-chapter-gap" aria-disabled="true"><span class="kj6-chapter-card__number">XXI</span><span class="kj6-chapter-card__title">Historische Lücke</span></div></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xxii.html"><span class="kj6-chapter-card__number">XXII</span><span class="kj6-chapter-card__title">Der Ruf der Erinnerung</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xxiii.html"><span class="kj6-chapter-card__number">XXIII</span><span class="kj6-chapter-card__title">Das Echo des Ursprungs</span></a></li>
+        <li class="kj6-chapter-card kj6-chapter-card--gap"><div class="kj6-chapter-gap" aria-disabled="true"><span class="kj6-chapter-card__number">XXIV</span><span class="kj6-chapter-card__title">Historische Lücke</span></div></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xxv.html"><span class="kj6-chapter-card__number">XXV</span><span class="kj6-chapter-card__title">Der Ruf der Bewegung</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xxvi.html"><span class="kj6-chapter-card__number">XXVI</span><span class="kj6-chapter-card__title">Die Richtung</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xxvii.html"><span class="kj6-chapter-card__number">XXVII</span><span class="kj6-chapter-card__title">Der Pfad</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xxviii.html"><span class="kj6-chapter-card__number">XXVIII</span><span class="kj6-chapter-card__title">Der Abdruck</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xxix.html"><span class="kj6-chapter-card__number">XXIX</span><span class="kj6-chapter-card__title">Die Spur</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xxx.html"><span class="kj6-chapter-card__number">XXX</span><span class="kj6-chapter-card__title">Der Pfad</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xxxi.html"><span class="kj6-chapter-card__number">XXXI</span><span class="kj6-chapter-card__title">Die Richtung</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xxxii.html"><span class="kj6-chapter-card__number">XXXII</span><span class="kj6-chapter-card__title">Der innere Kreis</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xxxiii.html"><span class="kj6-chapter-card__number">XXXIII</span><span class="kj6-chapter-card__title">Die Stille</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xxxiv.html"><span class="kj6-chapter-card__number">XXXIV</span><span class="kj6-chapter-card__title">Die Schwelle</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xxxv.html"><span class="kj6-chapter-card__number">XXXV</span><span class="kj6-chapter-card__title">Jenseits der Schwelle</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xxxvi.html"><span class="kj6-chapter-card__number">XXXVI</span><span class="kj6-chapter-card__title">Die Landschaft hinter der Schwelle</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xxxvii.html"><span class="kj6-chapter-card__number">XXXVII</span><span class="kj6-chapter-card__title">Der Horizont der Ahnung</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xxxviii.html"><span class="kj6-chapter-card__number">XXXVIII</span><span class="kj6-chapter-card__title">Das leise Erwachen der Ferne</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xxxix.html"><span class="kj6-chapter-card__number">XXXIX</span><span class="kj6-chapter-card__title">Die vorbereitende Stille</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xl.html"><span class="kj6-chapter-card__number">XL</span><span class="kj6-chapter-card__title">Der tiefe Atemzug</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xli.html"><span class="kj6-chapter-card__number">XLI</span><span class="kj6-chapter-card__title">Der innere Kreis</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xlii.html"><span class="kj6-chapter-card__number">XLII</span><span class="kj6-chapter-card__title">Das Echo im Gewebe</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xliii.html"><span class="kj6-chapter-card__number">XLIII</span><span class="kj6-chapter-card__title">Die Schwelle im Schweigen</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xliv.html"><span class="kj6-chapter-card__number">XLIV</span><span class="kj6-chapter-card__title">Die Stimme hinter der Stille</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xlv.html"><span class="kj6-chapter-card__number">XLV</span><span class="kj6-chapter-card__title">Die Schwelle der Stimme</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xlvi.html"><span class="kj6-chapter-card__number">XLVI</span><span class="kj6-chapter-card__title">Die Tür hinter dem Klang</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xlvii.html"><span class="kj6-chapter-card__number">XLVII</span><span class="kj6-chapter-card__title">Der Raum hinter dem Klang</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xlviii.html"><span class="kj6-chapter-card__number">XLVIII</span><span class="kj6-chapter-card__title">Das Echo des Bewusstseins</span></a></li>
+        <li class="kj6-chapter-card"><a class="kj6-chapter-card__link" href="chronik-kapitel-xlix.html"><span class="kj6-chapter-card__number">XLIX</span><span class="kj6-chapter-card__title">Wenn Denken bewusst wird</span></a></li>
       </ul>
     </section>
   </main>
 
-  <footer class="site-footer">KJ6 · Chronik</footer>
+  <footer class="kj6-container kj6-footer">KJ6 · Chronik</footer>
 </body>
 </html>
